@@ -1,0 +1,3 @@
+mdt.lustrefs-MDT0000.hsm.agents=
+uuid=a1b1c2d3-e4f5-6789-abcd-ef0123456789 archive_id=1 requests=[current:3 ok:120 errors:2]
+uuid=fedcba98-7654-3210-fedc-ba9876543210 archive_id=2 requests=[current:0 ok:45 errors:0]

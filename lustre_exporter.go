@@ -19,9 +19,9 @@ import (
 	stdlog "log"
 	"net/http"
 	"os"
+	"strings"
 	"sync"
 	"time"
-	"strings"
 
 	"github.com/GSI-HPC/lustre_exporter/sources"
 	"github.com/prometheus/client_golang/prometheus"
