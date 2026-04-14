@@ -81,6 +81,18 @@ func newLustreProcMetric(item *lustreHelpStruct, source string, path string) *lu
 	}
 }
 
+func generateMetrics(metricMap map[string][]lustreHelpStruct, filter string, source string) []lustreProcMetric {
+	var metrics []lustreProcMetric
+	for path := range metricMap {
+		for _, item := range metricMap[path] {
+			if filter == extended || item.priorityLevel == core {
+				metrics = append(metrics, *newLustreProcMetric(&item, source, path))
+			}
+		}
+	}
+	return metrics
+}
+
 func newLustreStatsMetric(title string, help string, value float64, extraLabel string, extraLabelValue string) *lustreStatsMetric {
 	return &lustreStatsMetric{
 		title:           title,
