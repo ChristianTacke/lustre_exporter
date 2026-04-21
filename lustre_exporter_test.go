@@ -1182,6 +1182,17 @@ func TestCollector(t *testing.T) {
 		{"lustre_changelog_user_index", "Index of registered changelog user.", counter, []labelPair{{"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"id", "cl2"}}, 34, false},
 		{"lustre_changelog_user_idle_time", "Idle time in seconds of registered changelog user.", gauge, []labelPair{{"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"id", "cl1"}}, 1725676, false},
 		{"lustre_changelog_user_idle_time", "Idle time in seconds of registered changelog user.", gauge, []labelPair{{"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"id", "cl2"}}, 28, false},
+		// MDT HSM Agent Metrics
+		{"lustre_hsm_agent_requests", "Current number of pending HSM requests for an agent.", gauge, []labelPair{{"archive_id", "1"}, {"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"uuid", "a1b1c2d3-e4f5-6789-abcd-ef0123456789"}}, 3, false},
+		{"lustre_hsm_agent_requests", "Current number of pending HSM requests for an agent.", gauge, []labelPair{{"archive_id", "2"}, {"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"uuid", "fedcba98-7654-3210-fedc-ba9876543210"}}, 0, false},
+		{"lustre_hsm_agent_requests_ok_total", "Total number of successful HSM requests for an agent.", counter, []labelPair{{"archive_id", "1"}, {"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"uuid", "a1b1c2d3-e4f5-6789-abcd-ef0123456789"}}, 120, false},
+		{"lustre_hsm_agent_requests_ok_total", "Total number of successful HSM requests for an agent.", counter, []labelPair{{"archive_id", "2"}, {"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"uuid", "fedcba98-7654-3210-fedc-ba9876543210"}}, 45, false},
+		{"lustre_hsm_agent_request_errors_total", "Total number of failed HSM requests for an agent.", counter, []labelPair{{"archive_id", "1"}, {"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"uuid", "a1b1c2d3-e4f5-6789-abcd-ef0123456789"}}, 2, false},
+		{"lustre_hsm_agent_request_errors_total", "Total number of failed HSM requests for an agent.", counter, []labelPair{{"archive_id", "2"}, {"component", "mdt"}, {"target", "lustrefs-MDT0000"}, {"uuid", "fedcba98-7654-3210-fedc-ba9876543210"}}, 0, false},
+		// MDT HSM Action Metrics
+		{"lustre_hsm_actions", "Number of current HSM actions by type and status.", gauge, []labelPair{{"action", "archive"}, {"archive_id", "1"}, {"component", "mdt"}, {"status", "waiting"}, {"target", "lustrefs-MDT0000"}}, 2, false},
+		{"lustre_hsm_actions", "Number of current HSM actions by type and status.", gauge, []labelPair{{"action", "archive"}, {"archive_id", "2"}, {"component", "mdt"}, {"status", "waiting"}, {"target", "lustrefs-MDT0000"}}, 1, false},
+		{"lustre_hsm_actions", "Number of current HSM actions by type and status.", gauge, []labelPair{{"action", "restore"}, {"archive_id", "1"}, {"component", "mdt"}, {"status", "started"}, {"target", "lustrefs-MDT0000"}}, 1, false},
 		{"lustre_job_stats_total", "Number of operations the filesystem has performed.", counter, []labelPair{{"component", "mdt"}, {"jobid", "43"}, {"operation", "close"}, {"target", "lustrefs-MDT0000"}}, 87, false},
 		{"lustre_job_stats_total", "Number of operations the filesystem has performed.", counter, []labelPair{{"component", "mdt"}, {"jobid", "43"}, {"operation", "crossdir_rename"}, {"target", "lustrefs-MDT0000"}}, 2, false},
 		{"lustre_job_stats_total", "Number of operations the filesystem has performed.", counter, []labelPair{{"component", "mdt"}, {"jobid", "43"}, {"operation", "getattr"}, {"target", "lustrefs-MDT0000"}}, 45, false},

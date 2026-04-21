@@ -1,0 +1,5 @@
+mdt.lustrefs-MDT0000.hsm.actions=
+action=ARCHIVE archive#=1 fid=[0x200000403:0x1:0x0] compound/cookie=0/0 status=WAITING
+action=ARCHIVE archive#=1 fid=[0x200000404:0x1:0x0] compound/cookie=0/0 status=WAITING
+action=RESTORE archive#=1 fid=[0x200000405:0x1:0x0] compound/cookie=4/1 status=STARTED
+action=ARCHIVE archive#=2 fid=[0x200000406:0x1:0x0] compound/cookie=0/0 status=WAITING

@@ -157,14 +157,7 @@ func (s *lustreProcFsSource) generateOSTMetricTemplates(filter string) {
 			{"kbytestotal", "capacity_kibibytes", "Capacity of the pool in kibibytes", gaugeMetric, false, core},
 		},
 	}
-	for path := range metricMap {
-		for _, item := range metricMap[path] {
-			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "ost", path, item.helpText, item.hasMultipleVals, item.metricFunc)
-				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
-			}
-		}
-	}
+	s.lustreProcMetrics = append(s.lustreProcMetrics, generateMetrics(metricMap, filter, "ost")...)
 }
 
 func (s *lustreProcFsSource) generateMDTMetricTemplates(filter string) {
@@ -183,14 +176,7 @@ func (s *lustreProcFsSource) generateMDTMetricTemplates(filter string) {
 			{"job_stats", "job_stats_total", jobStatsHelp, counterMetric, true, core},
 		},
 	}
-	for path := range metricMap {
-		for _, item := range metricMap[path] {
-			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mdt", path, item.helpText, item.hasMultipleVals, item.metricFunc)
-				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
-			}
-		}
-	}
+	s.lustreProcMetrics = append(s.lustreProcMetrics, generateMetrics(metricMap, filter, "mdt")...)
 }
 
 func (s *lustreProcFsSource) generateMGSMetricTemplates(filter string) {
@@ -204,26 +190,12 @@ func (s *lustreProcFsSource) generateMGSMetricTemplates(filter string) {
 			{"kbytestotal", "capacity_kibibytes", "Capacity of the pool in kibibytes", gaugeMetric, false, core},
 		},
 	}
-	for path := range metricMap {
-		for _, item := range metricMap[path] {
-			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mgs", path, item.helpText, item.hasMultipleVals, item.metricFunc)
-				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
-			}
-		}
-	}
+	s.lustreProcMetrics = append(s.lustreProcMetrics, generateMetrics(metricMap, filter, "mgs")...)
 }
 
 func (s *lustreProcFsSource) generateMDSMetricTemplates(filter string) {
 	metricMap := map[string][]lustreHelpStruct{}
-	for path := range metricMap {
-		for _, item := range metricMap[path] {
-			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "mds", path, item.helpText, item.hasMultipleVals, item.metricFunc)
-				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
-			}
-		}
-	}
+	s.lustreProcMetrics = append(s.lustreProcMetrics, generateMetrics(metricMap, filter, "mds")...)
 }
 
 func (s *lustreProcFsSource) generateClientMetricTemplates(filter string) {
@@ -264,14 +236,7 @@ func (s *lustreProcFsSource) generateClientMetricTemplates(filter string) {
 			{"rpc_stats", "rpcs_offset", offsetHelp, gaugeMetric, false, core},
 		},
 	}
-	for path := range metricMap {
-		for _, item := range metricMap[path] {
-			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "client", path, item.helpText, item.hasMultipleVals, item.metricFunc)
-				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
-			}
-		}
-	}
+	s.lustreProcMetrics = append(s.lustreProcMetrics, generateMetrics(metricMap, filter, "client")...)
 }
 
 func (s *lustreProcFsSource) generateGenericMetricTemplates(filter string) {
@@ -294,14 +259,7 @@ func (s *lustreProcFsSource) generateGenericMetricTemplates(filter string) {
 			{"encrypt_page_pools", "out_of_memory_request_total", outOfMemHelp, counterMetric, false, extended},
 		},
 	}
-	for path := range metricMap {
-		for _, item := range metricMap[path] {
-			if filter == extended || item.priorityLevel == core {
-				newMetric := newLustreProcMetric(item.filename, item.promName, "generic", path, item.helpText, item.hasMultipleVals, item.metricFunc)
-				s.lustreProcMetrics = append(s.lustreProcMetrics, *newMetric)
-			}
-		}
-	}
+	s.lustreProcMetrics = append(s.lustreProcMetrics, generateMetrics(metricMap, filter, "generic")...)
 }
 
 func newLustreProcFsSource() LustreSource {

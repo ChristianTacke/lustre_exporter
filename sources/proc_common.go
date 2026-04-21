@@ -69,16 +69,28 @@ type lustreHelpStruct struct {
 	priorityLevel   string
 }
 
-func newLustreProcMetric(filename string, promName string, source string, path string, helpText string, hasMultipleVals bool, metricFunc prometheusType) *lustreProcMetric {
+func newLustreProcMetric(item *lustreHelpStruct, source string, path string) *lustreProcMetric {
 	return &lustreProcMetric{
-		filename:        filename,
-		promName:        promName,
+		filename:        item.filename,
+		promName:        item.promName,
 		source:          source,
 		path:            path,
-		helpText:        helpText,
-		hasMultipleVals: hasMultipleVals,
-		metricFunc:      metricFunc,
+		helpText:        item.helpText,
+		hasMultipleVals: item.hasMultipleVals,
+		metricFunc:      item.metricFunc,
 	}
+}
+
+func generateMetrics(metricMap map[string][]lustreHelpStruct, filter string, source string) []lustreProcMetric {
+	var metrics []lustreProcMetric
+	for path := range metricMap {
+		for _, item := range metricMap[path] {
+			if filter == extended || item.priorityLevel == core {
+				metrics = append(metrics, *newLustreProcMetric(&item, source, path))
+			}
+		}
+	}
+	return metrics
 }
 
 func newLustreStatsMetric(title string, help string, value float64, extraLabel string, extraLabelValue string) *lustreStatsMetric {
